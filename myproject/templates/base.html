@@ -27,28 +27,67 @@
         crossorigin="anonymous"></script>
 
     <div class='container'>
+
         <div class='row'>
+
             <div class='sidebar col-sm'>
-                <p>
-                    <img src="static/inbox.svg" width=50 height=50> Inbox <br>
-                    Welcome
-                    Today
-                    Next Week
-                    Projects
-                    for proj in proj
-                </p>
+
+                <nav class="nav flex-column">
+
+                    <p>Projects</p>
+
+
+                    {%for tasklist in tasklists%}
+
+                    <a class="nav-link" href="{{url_for('tasklists', id=tasklist.id )}}">
+                        {{tasklist.name}}</a> <a href="{{url_for('delete', id=tasklist.id )}}">Delete</a>
+
+                    {%endfor%}
+
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addtaskmodal">
+                        Launch demo modal
+                    </button>
+
+                    <div class="modal" tabindex="-1" role="dialog" id="addtaskmodal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add Project</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="post">
+                                    {{addtasklist.hidden_tag()}}
+                                    {{addtasklist.tasklistname.label}} {{addtasklist.tasklistname()}}
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">{{addtasklist.submit()}}</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </nav>
+
             </div>
 
             <div class='content col'>
-                This is the main main site my nigga
-                Lorem ipsum dolor,
-                sit amet consectetur adipisicing elit.
-                A autem animi similique maxime in,
-                impedit vel sunt, ad laboriosam illo
-                alias nulla provident. Maxime beatae
-                labore tempora modi corporis expedita!
+                {% block content %}
+
+                {% endblock content %}
             </div>
         </div>
+
+
     </div>
 </body>
 

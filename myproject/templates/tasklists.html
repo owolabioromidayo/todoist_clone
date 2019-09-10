@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{name}}</h1>
+
+{% for task in  tasks %}
+<p>{{task.name}} <a href="{{url_for('deltask', taskid=task.id )}}">Delete</a></p>
+
+{% endfor %}
+
+<form method="post">
+    {{addtask.hidden_tag()}}
+    {{addtask.taskname.label}} {{addtask.taskname()}}
+    {{addtask.submit()}}
+</form>
+
+{% endblock content %}
