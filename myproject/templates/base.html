@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Todoist Clone</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,6 +10,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='basic.css')}}">
 </head>
 
 <body>
@@ -26,69 +28,113 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-    <div class='container'>
-
-        <div class='row'>
-
-            <div class='sidebar col-sm'>
-
-                <nav class="nav flex-column">
-
-                    <p>Projects</p>
 
 
-                    {%for tasklist in tasklists%}
-
-                    <a class="nav-link" href="{{url_for('tasklists', id=tasklist.id )}}">
-                        {{tasklist.name}}</a> <a href="{{url_for('delete', id=tasklist.id )}}">Delete</a>
-
-                    {%endfor%}
 
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addtaskmodal">
-                        Launch demo modal
-                    </button>
 
-                    <div class="modal" tabindex="-1" role="dialog" id="addtaskmodal">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add Project</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form method="post">
-                                    {{addtasklist.hidden_tag()}}
-                                    {{addtasklist.tasklistname.label}} {{addtasklist.tasklistname()}}
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">{{addtasklist.submit()}}</button>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    </div>
-
-                                </form>
+    <header>
 
 
+        <nav class="navbar">
+            <a class="navbar-brand" href="{{url_for('home')}}">
+                <img src="../static/newbrandnew.svg">
+            </a>
+        </nav>
+
+
+    </header>
+
+
+
+
+    <div class='flex-container'>
+
+        <div class='tasklists'>
+
+
+
+            <p>Projects</p>
+
+
+            {%for tasklist in tasklists%}
+
+            <div class='tasklist'>
+                <div class='taskname' style="display: inline-block">
+                    <a href="{{url_for('tasklists', id=tasklist.id )}}">
+                        {{tasklist.name}}
+                    </a>
+                </div>
+
+
+                <span class='tasklist-btn'>
+                    <a href="{{url_for('delete', id=tasklist.id )}}">
+                        <img src=" ../static/delete.svg" alt="" width=20 height=20>
+                    </a>
+                </span>
+            </div>
+
+            <br>
+            <br>
+
+
+
+            {%endfor%}
+
+            <br>
+            <br>
+
+
+
+            <div class='addtasklist'>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addtaskmodal"
+                    style="border-radius:20px">+</button>
+                Add Project
+                <div class="modal" tabindex="-1" role="dialog" id="addtaskmodal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Project</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <form method="post">
+                                {{addtasklist.hidden_tag()}}
+                                {{addtasklist.tasklistname.label}} {{addtasklist.tasklistname()}}
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">{{addtasklist.submit()}}</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </form>
+
+
                         </div>
                     </div>
-
-
-
-                </nav>
-
+                </div>
             </div>
 
-            <div class='content col'>
-                {% block content %}
 
-                {% endblock content %}
-            </div>
+
+
+
+        </div>
+
+
+
+        <div class='flex-column'>
+            {% block content %}
+
+            {% endblock content %}
         </div>
 
 
     </div>
+
+
+
+
 </body>
 
 </html>

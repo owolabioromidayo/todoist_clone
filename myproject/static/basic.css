@@ -1,0 +1,35 @@
+header{
+    background-color: rgba(231, 66, 66, 0.938); 
+    width:100%;
+
+}
+
+header img{
+    margin: 0px 40px;
+    width: 40px;
+    height:40px;
+
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-container .tasklist{
+margin: 10% 200px;
+padding: 10% 500px;
+}
+
+.taskname{
+    margin-right: 10px;
+}
+
+.tasklist{
+    width: 20%;
+}
+
+.tasklist-btn{
+    position: relative;
+    right:10px;
+}
