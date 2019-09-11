@@ -60,18 +60,18 @@
             {%for tasklist in tasklists%}
 
             <div class='tasklist'>
-                <div class='taskname' style="display: inline-block">
-                    <a href="{{url_for('tasklists', id=tasklist.id )}}">
-                        {{tasklist.name}}
-                    </a>
-                </div>
+
+                <a href="{{url_for('tasklists', id=tasklist.id )}}" class='taskname'>
+                    {{tasklist.name}}
+                </a>
 
 
-                <span class='tasklist-btn'>
-                    <a href="{{url_for('delete', id=tasklist.id )}}">
-                        <img src=" ../static/delete.svg" alt="" width=20 height=20>
-                    </a>
-                </span>
+
+
+                <a href="{{url_for('delete', id=tasklist.id )}}" class='tasklist-btn'>
+                    <img src=" ../static/delete.svg" alt="" width=20 height=20>
+                </a>
+
             </div>
 
             <br>
