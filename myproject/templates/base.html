@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Todoist Clone</title>
-    <!-- Required meta tags -->
+    <title> Todoist Clone</title>
+    <link rel="icon" href="../static/img/brand21.png" style="background-color:black;">
+    <!-- Required metatags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,6 +13,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{{url_for('static', filename='basic.css')}}">
+    <link rel="shortcut icon" href="../static/img/brandicon2.svg" type="image/x-icon">
 </head>
 
 <body>
@@ -34,15 +36,11 @@
 
 
     <header>
-
-
         <nav class="navbar">
             <a class="navbar-brand" href="{{url_for('home')}}">
-                <img src="../static/newbrandnew.svg">
+                <img src="../static/img/brandicon2.svg">
             </a>
         </nav>
-
-
     </header>
 
 
@@ -52,12 +50,10 @@
 
         <div class='tasklists'>
 
-
-
-            <p>Projects</p>
-
+            <h3 style="position:relative; text-align:center; padding:20px;"><b>Projects</b></h3>
 
             {%for tasklist in tasklists%}
+
 
             <div class='tasklist'>
 
@@ -65,19 +61,27 @@
                     {{tasklist.name}}
                 </a>
 
+                <!-- <a href="{{url_for('delete', id=tasklist.id )}}" class='tasklist-btn'>
+                    <img src=" ../static/img/options.svg" width=25 height=25>
+                </a> -->
 
+                <div class="dropdown tasklist-btn">
+                    <a class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <img src=" ../static/img/options.svg" width=25 height=25>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{url_for('delete', id=tasklist.id )}}">Delete <img
+                                src="../static/img/delete.svg" width="20" height="20" style="float: right;">
+                        </a>
 
+                        <a class='dropdown-item' href="">Update
 
-                <a href="{{url_for('delete', id=tasklist.id )}}" class='tasklist-btn'>
-                    <img src=" ../static/delete.svg" alt="" width=20 height=20>
-                </a>
+                        </a>
+                    </div>
+                </div>
 
             </div>
-
-            <br>
-            <br>
-
-
 
             {%endfor%}
 
@@ -87,9 +91,15 @@
 
 
             <div class='addtasklist'>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addtaskmodal"
-                    style="border-radius:20px">+</button>
-                Add Project
+
+                <button data-target="#addtaskmodal" data-toggle="modal" class="addproject-button btn btn-light "
+                    style="font-size: 20px">+
+                </button>
+                <a class="addproject-button-label " data-target="#addtaskmodal" data-toggle="modal" href=""
+                    style="font-size: 20px">Add Project</a>
+
+
+
                 <div class="modal" tabindex="-1" role="dialog" id="addtaskmodal">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -122,8 +132,7 @@
         </div>
 
 
-
-        <div class='flex-column'>
+        <div class='flex-column content'>
             {% block content %}
 
             {% endblock content %}

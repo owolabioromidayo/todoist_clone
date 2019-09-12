@@ -1,13 +1,17 @@
+body{
+    background-color: #fafafa;
+}
+
 header{
-    background-color: rgba(231, 66, 66, 0.938); 
+    background-color: #DB4C3F; 
     width:100%;
 
 }
 
 header img{
-    margin: 0px 40px;
-    width: 40px;
-    height:40px;
+    margin: 0px 295px;
+    width: 36px;
+    height: 36px;
 
 }
 
@@ -20,13 +24,69 @@ header img{
 
 .taskname{
     float: left;
+    color: black;
 }
 
-.tasklist{
+.taskname:hover{
+    text-decoration: none;
+    color:black;
+}
+
+.tasklists{
     width: 200px;
-    margin-right: 50px; 
+    margin-left: 300px; 
 }
 
 .tasklist-btn{
     float:right;
+    
+}
+
+
+ 
+
+.tasks{
+    margin-left: 100px;
+    
+}
+
+.content{
+    background-color: white;
+    width: 45%;
+    margin-left: 30px;
+    height: 100vh;
+}
+
+
+
+.addproject-button:hover{
+    color: white !important;
+    background-color: #DB4C3F;
+}
+
+.addproject-button{
+    font-size: 20px;
+    border-radius: 50%;
+    border-width: 0px;
+}
+
+.addproject-button-label:hover{
+    color: #DB4C3F;
+    text-decoration: none;
+}
+
+.addproject-button-label{
+    color: black;
+}
+
+.tasklist:hover{
+    background-color: white;
+}
+
+.tasklist{
+    line-height: 25px;  
+    font-size: 20px;
+    color: black;
+    padding: 30px 30px 40px 30px;
+    
 }

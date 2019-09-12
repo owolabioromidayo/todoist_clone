@@ -12,3 +12,13 @@ class AddTask(FlaskForm):
 class AddTaskList(FlaskForm):
     tasklistname = StringField('',  validators=[DataRequired()])
     submit = SubmitField('Add Project')
+
+
+class UpdateTaskList(FlaskForm):
+    new_tasklistname = StringField('',  validators=[DataRequired()])
+    submit = SubmitField('Update Project Name')
+
+
+class UpdateTask(FlaskForm):
+    new_taskname = StringField('',  validators=[DataRequired()])
+    submit = SubmitField('Add Project')

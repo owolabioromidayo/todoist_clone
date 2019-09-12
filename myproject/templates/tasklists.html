@@ -1,19 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>{{name}}</h1>
 
-{% for task in  tasks %}
-<p>{{task.name}} <a href="{{url_for('deltask', taskid=task.id )}}">
-        <img src="../static/delete.svg" alt="" width=20 height=20>
-    </a></p>
 
-{% endfor %}
+<div class='tasks'>
+    <h1>{{name}}</h1>
+    {% for task in  tasks %}
 
-<form method="post">
-    {{addtask.hidden_tag()}}
-    {{addtask.taskname.label}} {{addtask.taskname()}}
-    {{addtask.submit()}}
-</form>
+    <span class='taskname'>{{task.name}}</span>
+    <div class="dropdown tasklist-btn">
+        <a class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src=" ../static/img/options.svg" width=25 height=25>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{{url_for('deltask', taskid=task.id )}}">Delete <img
+                    src="../static/img/delete.svg" width="20" height="20" style="float: right;"></a>
+
+            <a class='dropdown-item' href="">Update</a>
+
+        </div>
+    </div>
+
+    <!-- <a href="{{url_for('deltask', taskid=task.id )}}" class='tasklist-btn'>
+        <img src="../static/img/delete.svg" alt="" width=20 height=20>
+    </a> -->
+
+    <br> <br>
+
+    {% endfor %}
+
+    <form method="post">
+        {{addtask.hidden_tag()}}
+        {{addtask.taskname.label}} {{addtask.taskname()}}
+        {{addtask.submit()}}
+    </form>
+</div>
+
+
 
 {% endblock content %}
