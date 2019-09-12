@@ -1,46 +1,37 @@
 from myproject import app, db
 from myproject.models import Tasklist, Task
-from myproject.forms import AddTask, AddTaskList
+from myproject.forms import AddTask, AddTaskList, UpdateTask, UpdateTaskList
 from flask import render_template, redirect, url_for
-
-
-def tasklistform(addtasklist):
-    if addtasklist.validate_on_submit():
-        newtasklist = Tasklist(addtasklist.tasklistname.data)
-        db.session.add(newtasklist)
-        db.session.commit()
-
-        return redirect(url_for('home'))
 
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
 
     addtasklist = AddTaskList()
-    tasklistform(addtasklist)
+    addtasklist.run()
 
-    return render_template('home.html', tasklists=Tasklist.query.all(), addtasklist=addtasklist)
+    forms = {'addtasklist': addtasklist}
+    tasklists = Tasklist.query.all()
+
+    return render_template('home.html', tasklists=tasklists, forms=forms)
 
 
-@app.route('/tasklists/<id>', methods=['GET', 'POST'])
-def tasklists(id):
-
-    addtasklist = AddTaskList()
-    tasklistform(addtasklist)
+@app.route('/tasklist/<id>', methods=['GET', 'POST'])
+def tasklist(id):
 
     tasklist = Tasklist.query.get(id)
-    tasks = tasklist.tasks
+    tasklists = Tasklist.query.all()
+
+    # FORMS
+    addtasklist = AddTaskList()
+    addtasklist.run()
 
     addtask = AddTask()
+    addtask.run(tasklist)
 
-    if addtask.validate_on_submit():
-        newtask = Task(addtask.taskname.data, tasklist.id)
-        db.session.add(newtask)
-        db.session.commit()
+    forms = {'addtasklist': addtasklist, 'addtask': addtask}
 
-        return redirect(url_for('tasklists', id=id))
-
-    return render_template('tasklists.html', name=tasklist.name, tasks=tasks, tasklists=Tasklist.query.all(), addtasklist=addtasklist, addtask=addtask, tasklist=tasklist)
+    return render_template('tasklist.html', tasklists=tasklists, forms=forms, tasklist=tasklist)
 
 
 @app.route('/delete/<id>')
@@ -59,7 +50,45 @@ def deltask(taskid):
     db.session.delete(task)
     db.session.commit()
 
-    return redirect(url_for('tasklists', id=tasklist.id))
+    return redirect(url_for('tasklist', id=tasklist.id))
+
+
+@app.route('/update/<id>', methods=['GET', 'POST'])
+def update_tasklist(id):
+
+    tasklists = Tasklist.query.all()
+
+    addtasklist = AddTaskList()
+    addtasklist.run()
+
+    updatetasklist = UpdateTaskList()
+    if updatetasklist.validate_on_submit():
+
+        updatetasklist.run(id)
+
+        return redirect(url_for('tasklist', id=id))
+
+    forms = {'updatetasklist': updatetasklist, 'addtasklist': addtasklist}
+
+    return render_template('update_tasklist.html', forms=forms, tasklists=tasklists)
+
+
+@app.route('/updatetask/<taskid>', methods=['GET', 'POST'])
+def update_task(taskid):
+    tasklists = Tasklist.query.all()
+    addtasklist = AddTaskList()
+    addtasklist.run()
+
+    updatetask = UpdateTask()
+    if updatetask.validate_on_submit():
+        task = Task.query.get(taskid)
+        updatetask.run(task)
+
+        return redirect(url_for('tasklist', id=task.tasklist.id))
+
+    forms = {'updatetask': updatetask, 'addtasklist': addtasklist}
+
+    return render_template('update_task.html', forms=forms, tasklists=tasklists)
 
 
 if __name__ == '__main__':

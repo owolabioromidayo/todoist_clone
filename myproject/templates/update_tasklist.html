@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>New Form Name</h1>
+
+<form method="post">
+    {{forms['updatetasklist'].hidden_tag()}}
+    {{forms['updatetasklist'].new_tasklistname.label}} {{forms['updatetasklist'].new_tasklistname()}}
+    {{forms['updatetasklist'].submit()}}
+
+</form>
+
+{% endblock content %}

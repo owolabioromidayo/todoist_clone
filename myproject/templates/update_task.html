@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>New Task Name</h1>
+
+<form method="post">
+    {{forms['updatetask'].hidden_tag()}}
+    {{forms['updatetask'].new_taskname.label}} {{forms['updatetask'].new_taskname()}}
+    {{forms['updatetask'].submit()}}
+
+</form>
+
+{% endblock content %}

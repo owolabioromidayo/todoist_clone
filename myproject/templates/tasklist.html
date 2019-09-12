@@ -4,8 +4,8 @@
 
 
 <div class='tasks'>
-    <h1>{{name}}</h1>
-    {% for task in  tasks %}
+    <h1>{{tasklist.name}}</h1>
+    {% for task in  tasklist.tasks %}
 
     <span class='taskname'>{{task.name}}</span>
     <div class="dropdown tasklist-btn">
@@ -16,7 +16,7 @@
             <a class="dropdown-item" href="{{url_for('deltask', taskid=task.id )}}">Delete <img
                     src="../static/img/delete.svg" width="20" height="20" style="float: right;"></a>
 
-            <a class='dropdown-item' href="">Update</a>
+            <a class='dropdown-item' href="{{url_for('update_task', taskid=task.id)}}">Update</a>
 
         </div>
     </div>
@@ -30,9 +30,9 @@
     {% endfor %}
 
     <form method="post">
-        {{addtask.hidden_tag()}}
-        {{addtask.taskname.label}} {{addtask.taskname()}}
-        {{addtask.submit()}}
+        {{forms['addtask'].hidden_tag()}}
+        {{forms['addtask'].taskname.label}} {{forms['addtask'].taskname()}}
+        {{forms['addtask'].submit()}}
     </form>
 </div>
 

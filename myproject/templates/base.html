@@ -3,7 +3,7 @@
 
 <head>
     <title> Todoist Clone</title>
-    <link rel="icon" href="../static/img/brand21.png" style="background-color:black;">
+    <link rel="icon" href="../static/img/title_icon.png" style="background-color:black;">
     <!-- Required metatags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,7 +13,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{{url_for('static', filename='basic.css')}}">
-    <link rel="shortcut icon" href="../static/img/brandicon2.svg" type="image/x-icon">
+
 </head>
 
 <body>
@@ -38,7 +38,7 @@
     <header>
         <nav class="navbar">
             <a class="navbar-brand" href="{{url_for('home')}}">
-                <img src="../static/img/brandicon2.svg">
+                <img src="../static/img/brand.svg">
             </a>
         </nav>
     </header>
@@ -57,7 +57,7 @@
 
             <div class='tasklist'>
 
-                <a href="{{url_for('tasklists', id=tasklist.id )}}" class='taskname'>
+                <a href="{{url_for('tasklist', id=tasklist.id )}}" class='taskname'>
                     {{tasklist.name}}
                 </a>
 
@@ -75,15 +75,19 @@
                                 src="../static/img/delete.svg" width="20" height="20" style="float: right;">
                         </a>
 
-                        <a class='dropdown-item' href="">Update
+                        <a class='dropdown-item updatetasklist'
+                            href="{{url_for('update_tasklist', id=tasklist.id)}}">Update</a>
 
-                        </a>
+
+
                     </div>
                 </div>
 
             </div>
 
             {%endfor%}
+
+
 
             <br>
             <br>
@@ -110,10 +114,11 @@
                                 </button>
                             </div>
                             <form method="post">
-                                {{addtasklist.hidden_tag()}}
-                                {{addtasklist.tasklistname.label}} {{addtasklist.tasklistname()}}
+                                {{forms['addtasklist'].hidden_tag()}}
+                                {{forms['addtasklist'].tasklistname.label}} {{forms['addtasklist'].tasklistname()}}
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">{{addtasklist.submit()}}</button>
+                                    <button type="button"
+                                        class="btn btn-primary">{{forms['addtasklist'].submit()}}</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
 
